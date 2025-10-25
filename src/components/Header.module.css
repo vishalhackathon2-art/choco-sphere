@@ -1,0 +1,117 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: hsla(30, 20%, 98%, 0.8);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  z-index: 50;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-family: var(--font-serif);
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.nav {
+  display: none;
+  gap: 1.5rem;
+}
+
+.navLink {
+  color: var(--foreground);
+  transition: var(--transition-smooth);
+  font-weight: 500;
+}
+
+.navLink:hover {
+  color: var(--gold);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cartButton {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  color: var(--foreground);
+  transition: var(--transition-smooth);
+}
+
+.cartButton:hover {
+  color: var(--gold);
+}
+
+.cartBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--gold);
+  color: var(--primary);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.menuButton {
+  display: block;
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  color: var(--foreground);
+}
+
+@media (min-width: 768px) {
+  .logo {
+    font-size: 1.875rem;
+  }
+  
+  .nav {
+    display: flex;
+  }
+  
+  .menuButton {
+    display: none;
+  }
+  
+  .container {
+    padding: 0 2rem;
+  }
+}

@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+}
+
+.content {
+  text-align: center;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 4rem;
+  font-family: var(--font-serif);
+  font-weight: bold;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--chocolate), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text {
+  font-size: 1.25rem;
+  color: var(--muted-foreground);
+  margin-bottom: 1.5rem;
+}
+
+.link {
+  color: var(--accent);
+  text-decoration: underline;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.link:hover {
+  color: var(--chocolate);
+}

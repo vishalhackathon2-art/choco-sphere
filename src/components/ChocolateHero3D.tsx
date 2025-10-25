@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Float, Environment, ContactShadows } from '@react-three/drei';
-import { motion } from 'framer-motion';
+import styles from './ChocolateHero3D.module.css';
 
 function ChocolateSphere() {
   return (
@@ -35,7 +35,7 @@ function ChocolateSphere() {
 
 export const ChocolateHero3D = () => {
   return (
-    <div className="w-full h-[400px] md:h-[500px]">
+    <div className={styles.heroContainer}>
       <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <spotLight
