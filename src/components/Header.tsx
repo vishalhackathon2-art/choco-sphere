@@ -1,11 +1,13 @@
-import { ShoppingCart, Menu } from "lucide-react";
+import { ShoppingCart, Menu, Sun, Moon } from "lucide-react";
 import { useCartStore } from "@/store/cartStore";
-import { motion } from "framer-motion";
+import { useThemeStore } from "@/store/themeStore";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Header.module.css";
 
 export const Header = () => {
   const items = useCartStore((state) => state.items);
   const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const { isDark, toggle } = useThemeStore();
 
   return (
     <motion.header 
@@ -29,6 +31,39 @@ export const Header = () => {
         </div>
 
         <div className={styles.actions}>
+          <motion.button
+            className={styles.themeButton}
+            onClick={toggle}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Toggle dark mode"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {isDark ? (
+                <motion.span
+                  key="sun"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  style={{ display: 'flex' }}
+                >
+                  <Sun size={19} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="moon"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  style={{ display: 'flex' }}
+                >
+                  <Moon size={19} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
+
           <button className={styles.cartButton}>
             <ShoppingCart size={20} />
             {cartCount > 0 && (
