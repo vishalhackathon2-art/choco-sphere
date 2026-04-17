@@ -49,9 +49,22 @@ const AdminLayout = () => {
   const location = useLocation();
   const { user, token, clearSession } = useAuthStore();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isAdmin = Boolean(user && token && user.role === "ADMIN");
 
-  // Guard: redirect non-admins
-  if (!user || !token || user.role !== "ADMIN") {
+  const { data: orders = [] } = useQuery({
+    queryKey: ["admin", "orders"],
+    queryFn: () => apiClient.adminGetOrders(token as string),
+    enabled: isAdmin,
+    refetchInterval: 30000,
+  });
+
+  const pendingCount = useMemo(
+    () => orders.filter((o) => o.status === "PENDING").length,
+    [orders]
+  );
+
+  // Guard: redirect non-admins (after all hooks)
+  if (!isAdmin || !user) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center px-4">
         <div className="max-w-md text-center space-y-4">
@@ -71,17 +84,6 @@ const AdminLayout = () => {
       </div>
     );
   }
-
-  const { data: orders = [] } = useQuery({
-    queryKey: ["admin", "orders"],
-    queryFn: () => apiClient.adminGetOrders(token),
-    refetchInterval: 30000,
-  });
-
-  const pendingCount = useMemo(
-    () => orders.filter((o) => o.status === "PENDING").length,
-    [orders]
-  );
 
   const initials = (user.name || user.email)
     .split(" ")
