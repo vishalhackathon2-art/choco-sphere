@@ -51,6 +51,10 @@ const AdminLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isAdmin = Boolean(user && token && user.role === "ADMIN");
 
+  console.log("AdminLayout - User:", user);
+  console.log("AdminLayout - Token:", token ? "exists" : "missing");
+  console.log("AdminLayout - isAdmin:", isAdmin);
+
   const { data: orders = [] } = useQuery({
     queryKey: ["admin", "orders"],
     queryFn: () => apiClient.adminGetOrders(token as string),

@@ -54,11 +54,15 @@ const Products = () => {
   const productsQuery = useQuery({
     queryKey: ["products"],
     queryFn: apiClient.getProducts,
+    staleTime: 10 * 60 * 1000, // 10 minutes
+    gcTime: 15 * 60 * 1000, // 15 minutes
   });
 
   const categoriesQuery = useQuery({
     queryKey: ["categories"],
     queryFn: apiClient.getCategories,
+    staleTime: 30 * 60 * 1000, // 30 minutes
+    gcTime: 60 * 60 * 1000, // 1 hour
   });
 
   const categories = categoriesQuery.data?.length ? categoriesQuery.data : fallbackCategories;
@@ -129,16 +133,14 @@ const Products = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
               >
-                <Link to={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <ProductCard
-                    id={product.id}
-                    name={product.name}
-                    price={product.price}
-                    image={product.image}
-                    description={product.description}
-                    categoryName={product.category.name}
-                  />
-                </Link>
+                <ProductCard
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  description={product.description}
+                  categoryName={product.category.name}
+                />
               </motion.div>
             ))}
           </div>

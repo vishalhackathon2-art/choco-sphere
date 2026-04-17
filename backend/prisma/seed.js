@@ -106,29 +106,7 @@ const main = async () => {
     },
   });
 
-  const existingOrder = await prisma.order.findFirst({
-    where: {
-      userId: customer.id,
-    },
-  });
-
-  if (!existingOrder) {
-    await prisma.order.create({
-      data: {
-        userId: customer.id,
-        totalAmount: darkTruffle.price * 2,
-        status: "PENDING",
-        items: {
-          create: [
-            {
-              productId: darkTruffle.id,
-              quantity: 2,
-            },
-          ],
-        },
-      },
-    });
-  }
+  // Skip order creation due to schema changes
 
   console.log("Seed completed");
   console.log("Admin login: admin@chocosphere.com / Admin@123");
