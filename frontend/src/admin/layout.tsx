@@ -162,8 +162,8 @@ const AdminLayout = () => {
           <div className="ml-auto flex items-center gap-2">
             {pendingCount > 0 && (
               <Badge
-                variant="outline"
-                className="hidden md:inline-flex border-amber-500/40 text-amber-500 bg-amber-500/10"
+                variant="secondary"
+                className="hidden md:inline-flex"
               >
                 {pendingCount} pending
               </Badge>
