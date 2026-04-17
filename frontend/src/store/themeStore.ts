@@ -6,7 +6,7 @@ interface ThemeState {
 }
 
 export const useThemeStore = create<ThemeState>((set) => ({
-  isDark: false,
+  isDark: true,
   toggle: () =>
     set((state) => {
       const next = !state.isDark;
